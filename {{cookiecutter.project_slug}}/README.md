@@ -1,0 +1,3 @@
+# {{cookiecutter.project_name}}
+
+Yet another Lablink client ...
