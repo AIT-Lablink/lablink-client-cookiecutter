@@ -5,3 +5,9 @@ Use this cookiecutter template to create new Lablink client projects.
 ```
 cookiecutter gh:ait-lablink/lablink-client-cookiecutter
 ```
+
+#
+
+<p align="center">
+  <img src="https://github.com/AIT-Lablink/lablink-docs-main/blob/main/source/img/lablink-architecture-animated.svg" alt="Lablink Architecture" width="600"/>
+</p>
