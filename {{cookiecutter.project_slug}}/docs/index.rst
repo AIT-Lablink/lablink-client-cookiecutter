@@ -1,12 +1,10 @@
 ***************************************************************
-Documentation for the {{cookiecutter.project_name}}
+{{cookiecutter.project_name}}
 ***************************************************************
 
 .. meta::
    :description lang=en: {{cookiecutter.project_name}}
 
-**This site is still under construction.**
+{{cookiecutter.project_description}}
 
-|under_construction|
-
-.. |under_construction| image:: https://upload.wikimedia.org/wikipedia/en/d/dc/Under_construction.svg
+The generated project contains ``DummyClient``, a small example that starts a Lablink client over MQTT, registers one string data service, and sets its value.

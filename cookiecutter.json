@@ -2,6 +2,9 @@
     "project_name": null,
     "project_slug": "{{ cookiecutter.project_name | slugify( separator = '-' ) }}",
     "artifact_id": "{{ cookiecutter.project_name | slugify( separator = '' ) }}",
+    "project_description": "Yet another Lablink client.",
+    "author_name": null,
+    "author_email": null,
     "_extensions": [
         "cookiecutter.extensions.SlugifyExtension"
     ]

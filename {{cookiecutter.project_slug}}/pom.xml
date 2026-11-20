@@ -7,8 +7,31 @@
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
-  <name>{{cookiecutter.project_slug}}</name>
+  <name>{{cookiecutter.project_name}}</name>
+  <description>{{cookiecutter.project_description}}</description>
   <url>https://github.com/AIT-Lablink/{{cookiecutter.project_slug}}</url>
+
+  <licenses>
+    <license>
+      <name>Lablink license</name>
+      <url>https://ait-lablink.readthedocs.io/en/latest/availability.html#lablink-license</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>{{cookiecutter.author_name}}</name>
+      <email>{{cookiecutter.author_email}}</email>
+      <organization>AIT Austrian Institute of Technology</organization>
+      <organizationUrl>https://www.ait.ac.at</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/AIT-Lablink/{{cookiecutter.project_slug}}.git</connection>
+    <developerConnection>scm:git:https://github.com/AIT-Lablink/{{cookiecutter.project_slug}}.git</developerConnection>
+    <url>http://github.com/AIT-Lablink/{{cookiecutter.project_slug}}/tree/main</url>
+  </scm>
 
   <properties>
     <maven.compiler.source>13</maven.compiler.source>
@@ -18,51 +41,57 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
   
-  <repositories>
-
-    <repository>
-      <id>github</id>
-      <name>GitHub AIT-Lablink Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/ait-lablink/lablink-core-java</url>
-    </repository>
-
-    <repository>
-      <id>central</id>
-      <name>Maven Repository Switchboard</name>
-      <layout>default</layout>
-      <url>https://repo1.maven.org/maven2</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </repository>
-
-  </repositories>
-
   <distributionManagement>
-
-    <repository>
-      <id>github</id>
-      <name>GitHub AIT-Lablink Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/ait-lablink/{{cookiecutter.project_slug}}</url>
-    </repository>
-
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <build>
 
-    <testResources>
-      <testResource>
-        <directory>src/test/resources</directory>
-        <filtering>true</filtering>
-      </testResource>
-    </testResources>
-
     <plugins>
+
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.12.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>ossrh</publishingServerId>
+          <autoPublish>false</autoPublish>
+          <waitUntil>published</waitUntil>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -78,7 +107,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>3.12.0</version>
         <configuration>
           <show>private</show>
           <docfilessubdirs>true</docfilessubdirs>
@@ -128,7 +157,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.6</version>
+        <version>3.8.0</version>
         <executions>
           <execution>
             <!-- generate assembly containing all dependencies -->
@@ -224,13 +253,13 @@
     </dependency>
 
     <!-- Run-time dependencies to other Lablink packages for testing -->
-    <!-- <dependency> -->
-      <!-- <groupId>at.ac.ait.lablink</groupId> -->
-      <!-- <artifactId>config</artifactId> -->
-      <!-- <version>0.1.1</version> -->
-      <!-- <classifier>jar-with-dependencies</classifier> -->
-      <!-- <scope>provided</scope> -->
-    <!-- </dependency> -->
+    <dependency>
+      <groupId>at.ac.ait.lablink</groupId>
+      <artifactId>config</artifactId>
+      <version>0.1.1</version>
+      <classifier>jar-with-dependencies</classifier>
+      <scope>provided</scope>
+    </dependency>
 
   </dependencies>
 
